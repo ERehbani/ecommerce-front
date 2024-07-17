@@ -5,6 +5,7 @@ import Link from 'next/link'
 const Navbar = () => {
   return (
     <div className='bg-gray-800'>
+      
       <div className='container mx-auto py-5 flex justify-between items-center'>
         <h1 className='text-orange-600 font-bold text-xl'>Ecommerce</h1>
         <div className='flex gap-10'>

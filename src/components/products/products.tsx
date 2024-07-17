@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import type { Product } from "../types";
+import type { Product } from "../../types";
 import {
   Card,
   CardContent,
@@ -20,6 +20,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Skeleton } from "../ui/skeleton";
+import ProductCard from "../core/productCard";
 
 const getProducts = async (page: number) => {
   const response = await fetch(
@@ -34,7 +35,7 @@ export default function Products() {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  console.log(currentPage)
+  console.log(currentPage);
 
   useEffect(() => {
     setLoading(true);
@@ -68,35 +69,17 @@ export default function Products() {
         </div>
       ) : (
         <div className="grid grid-cols-4 gap-x-2 gap-y-14">
-  {products.map((product: Product) => (
-    <Card
-      key={product._id}
-      className="w-[280px] max-h-[448px] bg-gray-800 text-white py-4 flex flex-col justify-between">
-      <CardHeader className="gap-5">
-        <Image
-          className="w-full object-cover h-40 rounded-lg"
-          src={
-            "https://images.unsplash.com/photo-1569668444050-b7bc2bfec0c7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
-          alt="photo"
-          width={300}
-          height={30}
-        />
-        <CardTitle className="h-12">{product.title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p>{product.description}</p>
-      </CardContent>
-
-      <CardFooter className="flex flex-col items-start gap-5 mt-auto">
-        <p>${product.price}</p>
-        <Button className="w-full bg-orange-600 ">Ver más {">"}</Button>
-      </CardFooter>
-    </Card>
-  ))}
-</div>
-
-      
+          {products.map((product: Product) => (
+            <ProductCard
+              key={product._id}
+              image={product.thumbnails[0]}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+              category={product.category}
+            />
+          ))}
+        </div>
       )}
       <Pagination className="">
         <PaginationContent className="bg-gray-800 text-white rounded-md">
@@ -108,7 +91,11 @@ export default function Products() {
           </PaginationItem>
           {[1, 2, 3, 4, 5, 6, 7, 8].map((page) => (
             <PaginationItem key={page}>
-              <PaginationLink href="#" onClick={() => handlePageChange(page)} isActive={currentPage === page} className="text-gray-600">
+              <PaginationLink
+                href="#"
+                onClick={() => handlePageChange(page)}
+                isActive={currentPage === page}
+                className="text-gray-600">
                 {page}
               </PaginationLink>
             </PaginationItem>
