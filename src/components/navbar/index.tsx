@@ -4,13 +4,13 @@ import Link from "next/link";
 import { Input } from "../ui/input";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
-import logo from "../../../public/storigami.svg"
+import logo from "../../../public/storigami.svg";
 
 const Navbar = () => {
   return (
     <div className="bg-white border-b border-[#bba583]">
       <div className="container mx-auto py-5 flex justify-between items-center">
-        <Image src={logo} alt="logo"/>
+        <Image src={logo} alt="logo" />
         <div className="relative flex-grow mx-[10%]">
           <Input
             type="search"
@@ -25,7 +25,7 @@ const Navbar = () => {
             Register
           </Button>
           <Button className="shadow-md border border-[#bba583] bg-white text-[#bba583] hover:bg-[#bba583] hover:text-white">
-            <Link href={"login"}>LogIn</Link>
+            <Link href={"/login"}>LogIn</Link>
           </Button>
         </div>
       </div>

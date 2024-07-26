@@ -31,23 +31,43 @@ const Aside = () => {
       <h2 className="text-xl font-semibold">Puntuación</h2>
 
       <div className="flex flex-col gap-2">
-        <div className="flex items-center">
-          1
-          <StarFilledIcon />
+        <div className="flex items-center gap-2">
+          <p>1</p>
+          <StarFilledIcon className="text-[#bba583]" />
         </div>
-        <div className="flex items-center">
-          2 <StarFilledIcon /> <StarFilledIcon />
+        <div className="flex items-center gap-2">
+          <p>2</p>
+          <div className="flex gap-1">
+            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-[#bba583]" />
+          </div>
         </div>
-        <div className="flex items-center">
-          3 <StarFilledIcon /> <StarFilledIcon /> <StarFilledIcon />
+        <div className="flex items-center gap-2">
+          <p>3</p>
+          <div className="flex gap-1">
+            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-[#bba583]" />
+          </div>
         </div>
-        <div className="flex items-center">
-          4 <StarFilledIcon /> <StarFilledIcon /> <StarFilledIcon />{" "}
-          <StarFilledIcon />
+        <div className="flex items-center gap-2">
+          <p>4</p>
+          <div className="flex gap-1">
+            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-[#bba583]" />
+          </div>
         </div>
-        <div className="flex items-center">
-          5 <StarFilledIcon /> <StarFilledIcon /> <StarFilledIcon />{" "}
-          <StarFilledIcon /> <StarFilledIcon />
+        <div className="flex items-center gap-2">
+          <p>5</p>
+          <div className="flex gap-1">
+            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-[#bba583]" />
+          </div>
         </div>
       </div>
     </aside>

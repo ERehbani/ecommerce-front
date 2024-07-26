@@ -12,6 +12,8 @@ import "./css/base.css";
 import "./css/sandbox.css";
 import "./css/embla.css";
 import Link from "next/link";
+import Google from "../../../public/googleLogo.webp";
+import Github from "../../../public/github-color.svg";
 
 const LogIn = () => {
   const router = useRouter();
@@ -34,6 +36,13 @@ const LogIn = () => {
       <span className="text-lg font-semibold">Failed to login</span>
     </div>
   );
+
+  const handleLoginGithub = () => {
+    // Redirige al usuario al endpoint de backend para iniciar la autenticación de GitHub
+    window.location.href = 'http://localhost:8080/api/sessions/github';
+  };
+
+
 
   const formik = useFormik({
     initialValues: {
@@ -90,10 +99,9 @@ const LogIn = () => {
         <form
           onSubmit={formik.handleSubmit}
           className=" rounded-lg flex flex-col gap-10 w-[350px]">
-          <h2 className="font-bold text-2xl">LogIn</h2>
+          <h2 className="font-bold text-2xl">Iniciar sesión</h2>
           <div className="flex flex-col gap-5 ">
             <div className="flex flex-col gap-3">
-             
               <Input
                 onChange={formik.handleChange}
                 type="email"
@@ -117,10 +125,39 @@ const LogIn = () => {
                 onBlur={formik.handleBlur}
               />
             </div>
-          <Button type="submit" className="bg-black h-14">
-            Iniciar sesión
-          </Button>
-        <Link href={"/"}>Olvidé mis datos</Link>
+            <Button
+              type="submit"
+              className="bg-black rounded-xl h-14 hover:shadow-lg transition-all ease-in hover:bg-black">
+              Iniciar sesión
+            </Button>
+            <Link href={"/"} className="text-[#8e6a35] text-center">
+              Olvidé mis datos
+            </Link>
+            <Button
+              type="submit"
+              className="bg-white text-black font-semibold rounded-xl h-14 flex border border-[#bba583] hover:bg-white hover:shadow-md transition-all ease-in">
+              <Image src={Google} alt="Google" className="size-7 " />
+              <span className="flex-grow text-center">
+                Inicia sesión con Google
+              </span>
+            </Button>
+            <Button
+               onClick={handleLoginGithub}
+              className="bg-white text-black font-semibold rounded-xl h-14 flex border border-[#bba583] hover:bg-white hover:shadow-md transition-all ease-in">
+              <Image src={Github} alt="Github" className="size-7 " />
+              <span className="flex-grow text-center">
+                Inicia sesión con Github
+              </span>
+            </Button>
+
+            <div className="border-b border-[#bba583]" />
+
+            <div className="flex gap-2 justify-center">
+              <h3 className="text-[#8e6a35]">¿No tienes cuenta?</h3>
+              <Link href={"/register"} className="font-bold">
+                Regístrate
+              </Link>
+            </div>
           </div>
         </form>
       </div>
