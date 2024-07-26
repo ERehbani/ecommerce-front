@@ -10,13 +10,13 @@ import {
 import Image from "next/image";
 
 import React, { useState } from "react";
-import { HeartIcon, HeartFilledIcon } from "@radix-ui/react-icons";
+import { HeartIcon, HeartFilledIcon} from "@radix-ui/react-icons";
 
-const ProductCard = (product: ProductCardType) => {
+const CarouselCard = (product: ProductCardType) => {
   const [favorite, setFavorite] = useState(false);
 
   return (
-    <Card className="w-[228px] max-h-[500px] bg-white text-black shadow-xl p-3 flex flex-col gap-2 justify-between">
+    <Card className="w-[228px] max-h-[500px] bg-white text-black shadow-md p-3 flex flex-col gap-2 justify-between">
       <CardHeader className="gap-2 p-0 relative">
         <Image
           className="w-full object-cover size-36 rounded-lg"
@@ -35,9 +35,8 @@ const ProductCard = (product: ProductCardType) => {
           )}
         </Button>
         <div className="flex justify-between">
-          <p className="text-xs bg-[#bba583] text-white py-1 px-3 rounded-xl">
-            {product.category}
-          </p>
+          
+        <CardTitle className="text-sm">{product.title}</CardTitle>
           <p className="flex items-center gap-1 text-xs">
             <svg
               width="12"
@@ -56,18 +55,17 @@ const ProductCard = (product: ProductCardType) => {
             4.7
           </p>
         </div>
-        <CardTitle className="text-sm">{product.title}</CardTitle>
       </CardHeader>
-      <CardContent className="p-0">
+      {/* <CardContent className="p-0">
         <p className="text-xs">{product.description}</p>
       </CardContent>
 
       <CardFooter className="flex flex-col items-start mt-auto p-0 gap-2">
         <p className="text-sm font-bold">${product.price}</p>
         <Button className="w-full bg-black text-xs">Añadir al carrito</Button>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 };
 
-export default ProductCard;
+export default CarouselCard;

@@ -18,4 +18,5 @@ export interface ProductCardType {
   price: number;
   image: string;
   category: string;
+  isLogin: boolean;
 }
