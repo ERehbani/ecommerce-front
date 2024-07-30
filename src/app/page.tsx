@@ -1,8 +1,33 @@
+"use client"
 import Aside from "@/components/core/aside";
 import { CarouselDemo } from "@/components/core/carousel";
 import Products from "@/components/products/products";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
+// import { useRouter } from "next/router";
 
 export default function Home() {
+  
+  // const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get('auth_token');
+    console.log(token)
+    if (token) {
+      const decoded = jwtDecode(token);
+      console.log('Decoded Token:', decoded);
+
+      const { usuario, login } = decoded;
+      console.log('User Data:', usuario);
+      console.log('Login Status:', login);
+
+      localStorage.setItem('user', JSON.stringify(usuario));
+      localStorage.setItem('login', login);
+
+    }
+  }, []);
+
   return (
     <main className="mx-auto flex gap-28">
       <Aside />

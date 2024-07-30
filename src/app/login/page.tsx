@@ -14,9 +14,33 @@ import "./css/embla.css";
 import Link from "next/link";
 import Google from "../../../public/googleLogo.webp";
 import Github from "../../../public/github-color.svg";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 const LogIn = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get('auth_token');
+
+    if (token) {
+      // Decode the JWT token to get user data
+      const decoded = jwtDecode(token);
+      console.log('Decoded Token:', decoded);
+
+      // Store user data as needed
+      const { usuario, login } = decoded;
+      console.log('User Data:', usuario);
+      console.log('Login Status:', login);
+
+      // Example: Save to local storage
+      localStorage.setItem('user', JSON.stringify(usuario));
+      localStorage.setItem('login', login);
+
+      // Redirect to the desired page after storing data
+    }
+  }, [router]);
 
   const errorMessage = (
     <div className="flex items-center gap-3">
@@ -39,10 +63,8 @@ const LogIn = () => {
 
   const handleLoginGithub = () => {
     // Redirige al usuario al endpoint de backend para iniciar la autenticación de GitHub
-    window.location.href = 'http://localhost:8080/api/sessions/github';
+    window.location.href = "http://localhost:8080/api/sessions/github";
   };
-
-
 
   const formik = useFormik({
     initialValues: {
@@ -142,7 +164,7 @@ const LogIn = () => {
               </span>
             </Button>
             <Button
-               onClick={handleLoginGithub}
+              onClick={handleLoginGithub}
               className="bg-white text-black font-semibold rounded-xl h-14 flex border border-[#bba583] hover:bg-white hover:shadow-md transition-all ease-in">
               <Image src={Github} alt="Github" className="size-7 " />
               <span className="flex-grow text-center">
