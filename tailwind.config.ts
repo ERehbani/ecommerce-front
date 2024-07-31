@@ -10,6 +10,11 @@ const config = {
   ],
   prefix: "",
   theme: {
+    colors: {
+      'white': '#ffffff',
+      'black': '#000000',
+      'principal': '#bba583'
+    },
     container: {
       center: true,
       padding: "2rem",

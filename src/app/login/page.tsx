@@ -100,7 +100,7 @@ const LogIn = () => {
         <div className="flex flex-col gap-10 flex-grow justify-center pt-32">
           <Image src={storigami} alt="logo" className="w-4/12" />
           <h1 className="font-extrabold text-5xl">
-            <b className="font-extrabold text-[#bba583]">
+            <b className="font-extrabold text-principal">
               Comprá lo que necesitás
             </b>{" "}
             más caro que en otro lado.
@@ -110,7 +110,7 @@ const LogIn = () => {
             pasar nada.
           </p>
         </div>
-        <div className="pb-20">
+        <div className="pb-20 pointer-events-none select-none">
           <EmblaCarousel
             slides={[8, 2, 21, 12, 312, 312, 3, 123, 12, 32, 3]}
             options={{ loop: true }}
@@ -130,7 +130,7 @@ const LogIn = () => {
                 id="email"
                 name="email"
                 placeholder="Correo electronico"
-                className="border border-[#bba583] h-14 rounded-xl w-"
+                className="border border-principal h-14 rounded-xl w-"
                 value={formik.values.email}
                 onBlur={formik.handleBlur}
               />
@@ -142,14 +142,14 @@ const LogIn = () => {
                 id="password"
                 name="password"
                 placeholder="Contraseña"
-                className="border border-[#bba583] h-14 rounded-xl w-full"
+                className="border border-principal h-14 rounded-xl w-full"
                 value={formik.values.password}
                 onBlur={formik.handleBlur}
               />
             </div>
             <Button
               type="submit"
-              className="bg-black rounded-xl h-14 hover:shadow-lg transition-all ease-in hover:bg-black">
+              className="bg-black text-white rounded-xl h-14 hover:shadow-lg transition-all ease-in hover:bg-black">
               Iniciar sesión
             </Button>
             <Link href={"/"} className="text-[#8e6a35] text-center">
@@ -157,7 +157,7 @@ const LogIn = () => {
             </Link>
             <Button
               type="submit"
-              className="bg-white text-black font-semibold rounded-xl h-14 flex border border-[#bba583] hover:bg-white hover:shadow-md transition-all ease-in">
+              className="bg-white text-black font-semibold rounded-xl h-14 flex border border-principal hover:bg-white hover:shadow-md transition-all ease-in">
               <Image src={Google} alt="Google" className="size-7 " />
               <span className="flex-grow text-center">
                 Inicia sesión con Google
@@ -165,14 +165,14 @@ const LogIn = () => {
             </Button>
             <Button
               onClick={handleLoginGithub}
-              className="bg-white text-black font-semibold rounded-xl h-14 flex border border-[#bba583] hover:bg-white hover:shadow-md transition-all ease-in">
+              className="bg-white text-black font-semibold rounded-xl h-14 flex border border-principal hover:bg-white hover:shadow-md transition-all ease-in">
               <Image src={Github} alt="Github" className="size-7 " />
               <span className="flex-grow text-center">
                 Inicia sesión con Github
               </span>
             </Button>
 
-            <div className="border-b border-[#bba583]" />
+            <div className="border-b border-principal" />
 
             <div className="flex gap-2 justify-center">
               <h3 className="text-[#8e6a35]">¿No tienes cuenta?</h3>

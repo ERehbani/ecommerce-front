@@ -1,4 +1,4 @@
-import type { Product, ProductCardType } from "@/types";
+"use client"
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,16 +7,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import type { ProductCardType } from "@/types";
 import Image from "next/image";
 
-import React, { useState } from "react";
-import { HeartIcon, HeartFilledIcon } from "@radix-ui/react-icons";
+import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 
 const ProductCard = (product: ProductCardType) => {
   const [favorite, setFavorite] = useState(false);
 
   return (
-    <Card className="w-[228px] max-h-[500px] bg-white text-black shadow-xl p-3 flex flex-col gap-2 justify-between">
+    <Card className="w-[208px] max-h-[480px] bg-white border-white shadow-xl p-3 flex flex-col gap-2 justify-between">
       <CardHeader className="gap-2 p-0 relative">
         <Image
           className="w-full object-cover size-36 rounded-lg"
@@ -27,15 +28,15 @@ const ProductCard = (product: ProductCardType) => {
           width={300}
           height={30}
         />
-        <Button onClick={() => setFavorite(!favorite)} className="bg-[#bba583] absolute right-1 w-min p-1 rounded-full">
+        <Button onClick={() => setFavorite(!favorite)} className="bg-principal absolute right-1 w-min p-1 rounded-full">
           {favorite ? (
-            <HeartFilledIcon className="size-5" />
+            <HeartFilledIcon className="size-5 text-white" />
           ) : (
-            <HeartIcon className="size-5" />
+            <HeartIcon className="size-5 text-white" />
           )}
         </Button>
         <div className="flex justify-between">
-          <p className="text-xs bg-[#bba583] text-white py-1 px-3 rounded-xl">
+          <p className="text-xs bg-principal text-white py-1 px-3 rounded-xl">
             {product.category}
           </p>
           <p className="flex items-center gap-1 text-xs">
@@ -64,7 +65,7 @@ const ProductCard = (product: ProductCardType) => {
 
       <CardFooter className="flex flex-col items-start mt-auto p-0 gap-2">
         <p className="text-sm font-bold">${product.price}</p>
-        <Button className="w-full bg-black text-xs">Añadir al carrito</Button>
+        <Button className="w-full bg-black text-white text-xs">Añadir al carrito</Button>
       </CardFooter>
     </Card>
   );

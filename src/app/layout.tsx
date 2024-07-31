@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import type { Metadata } from "next";
 import { Inter, Nunito_Sans } from "next/font/google";
 import "./globals.css";
@@ -6,7 +6,7 @@ import Navbar from "@/components/navbar";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
-
+import Hydration from "@/context/hydation";
 
 const nunito = Nunito_Sans({ subsets: ["latin"] });
 
@@ -20,8 +20,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const path = usePathname()
+  const path = usePathname();
   return (
     <html lang="en">
       <body
@@ -29,9 +28,11 @@ export default function RootLayout({
           "min-h-screen bg-background antialiased",
           nunito.className
         )}>
-       {path !== "/login" &&  <Navbar />}
+        <Hydration />
+
+        {path !== "/login" && <Navbar />}
         {children}
-        <Toaster/>
+        <Toaster />
       </body>
     </html>
   );

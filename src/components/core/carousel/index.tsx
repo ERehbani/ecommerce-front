@@ -13,10 +13,10 @@ export function CarouselDemo() {
   return (
     <Carousel className="w-full p-0 h-fit relative">
     <div className="absolute z-20 right-12 top-6 flex gap-4">
-    <CarouselPrevious className="size-12"/>
-    <CarouselNext className="size-12"/>
+    <CarouselPrevious className="size-12 border-none"/>
+    <CarouselNext className="size-12 border-none"/>
     </div>
-      <CarouselContent className="h-fit">
+      <CarouselContent className="h-fit w-full">
         {Array.from({ length: 5 }).map((_, index) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             <CarouselItem key={index} className="p-0">

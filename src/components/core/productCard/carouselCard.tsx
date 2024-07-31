@@ -16,7 +16,7 @@ const CarouselCard = (product: ProductCardType) => {
   const [favorite, setFavorite] = useState(false);
 
   return (
-    <Card className="w-[228px] max-h-[500px] bg-white text-black shadow-md p-3 flex flex-col gap-2 justify-between">
+    <Card className="w-[228px] max-h-[500px] bg-white border-white shadow-md p-3 flex flex-col gap-2 justify-between">
       <CardHeader className="gap-2 p-0 relative">
         <Image
           className="w-full object-cover size-36 rounded-lg"
@@ -27,11 +27,11 @@ const CarouselCard = (product: ProductCardType) => {
           width={300}
           height={30}
         />
-        <Button onClick={() => setFavorite(!favorite)} className="bg-[#bba583] absolute right-1 w-min p-1 rounded-full">
+        <Button onClick={() => setFavorite(!favorite)} className="bg-principal absolute right-1 w-min p-1 rounded-full">
           {favorite ? (
-            <HeartFilledIcon className="size-5" />
+            <HeartFilledIcon className="size-5 text-white" />
           ) : (
-            <HeartIcon className="size-5" />
+            <HeartIcon className="size-5 text-white" />
           )}
         </Button>
         <div className="flex justify-between">

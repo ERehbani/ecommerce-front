@@ -1,38 +1,60 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import { Input } from "../ui/input";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import logo from "../../../public/storigami.svg";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+
+const getUser = () => {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const token = Cookies.get("auth_token");
+
+  if (token) {
+    const decoded = jwtDecode(token);
+    console.log("Decoded Token:", decoded);
+
+    const { usuario, login } = decoded;
+    console.log("User Data:", usuario);
+    console.log("Login Status:", login);
+
+    localStorage.setItem("user", JSON.stringify(usuario));
+    localStorage.setItem("login", login);
+  }
+
+  const userLocal = localStorage.getItem("user");
+  return userLocal ? JSON.parse(userLocal) : null;
+};
 
 const Navbar = () => {
-  const [user, setUser] = useState();
-  console.log(user);
-  useEffect(() => {
-    const userLocal = localStorage.getItem("user");
+  const [user, setUser] = useState(null);
 
-    const userParse = JSON.parse(userLocal);
-    setUser(userParse);
+  useEffect(() => {
+    const userData = getUser();
+    setUser(userData);
   }, []);
+
   return (
-    <div className="bg-white border-b border-[#bba583]">
+    <div className="bg-white border-b border-principal">
       <div className="container mx-auto py-5 flex justify-between items-center">
         <Image src={logo} alt="logo" />
         <div className="relative flex-grow mx-[10%]">
           <Input
             type="search"
             placeholder="Buscar un producto"
-            className="w-full rounded-lg bg-background pr-12 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary border-[#bba583]
-            "
+            className="w-full rounded-lg bg-background pr-12 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary border-principal"
           />
-          <MagnifyingGlassIcon className="absolute right-2.5 top-3 h-4 w-4 text-muted-foreground text-[#bba583]" />
+          <MagnifyingGlassIcon className="absolute right-2.5 top-3 h-4 w-4 text-muted-foreground text-principal" />
         </div>
         {user ? (
           <div className="flex items-center gap-4">
-            <Button className="relative p-4 shadow-md border border-[#bba583] bg-white text-[#bba583] hover:bg-[#bba583] hover:text-white group">
-              <div className="absolute right-1 top-1 size-5 bg-blue-500 rounded-full flex items-center justify-center">
+            <Button className="relative p-4 shadow-md border border-principal bg-white text-principal hover:bg-principal hover:text-white group">
+              <div className="absolute right-1 top-1 size-5 bg-[#17a2a8] rounded-full flex items-center justify-center">
                 <p className="text-white text-xs p-1">3</p>
               </div>
               <svg
@@ -61,10 +83,10 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="flex gap-10">
-            <Button className="shadow-md text-white border border-[#bba583] bg-[#bba583] hover:text-[#bba583] hover:bg-white hover:border hover:border-[#bba583]">
+            <Button className="shadow-md text-white border border-principal bg-principal hover:text-principal hover:bg-white hover:border hover:border-principal">
               Register
             </Button>
-            <Button className="shadow-md border border-[#bba583] bg-white text-[#bba583] hover:bg-[#bba583] hover:text-white">
+            <Button className="shadow-md border border-principal bg-white text-principal hover:bg-principal hover:text-white">
               <Link href={"/login"}>LogIn</Link>
             </Button>
           </div>

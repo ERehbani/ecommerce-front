@@ -65,7 +65,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       <div className="embla__viewport w-full h-56" ref={emblaRef}>
         <div className="embla__container w-full h-56 flex items-center">
           {slides.map((index) => (
-            <div className="embla__slide w-[228px] max-h-[500px]" key={index}>
+            <div className="embla__slide w-[228px] max-h-[500px] " key={index}>
               <div className="embla__slide__number ">
                 <CarouselCard
                   //   key={product._id}

@@ -1,52 +1,66 @@
-"use client"
+// src/app/page.tsx
+
+import { cookies } from "next/headers";
+import { jwtDecode } from "jwt-decode";
 import Aside from "@/components/core/aside";
 import { CarouselDemo } from "@/components/core/carousel";
 import Products from "@/components/products/products";
-import { useEffect } from "react";
-import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
-// import { useRouter } from "next/router";
+import { useBearStore } from "@/context/store";
 
-export default function Home() {
-  
-  // const router = useRouter();
+interface User {
+  // Define user properties based on your JWT payload
+  [key: string]: any;
+}
 
-  useEffect(() => {
-    const token = Cookies.get('auth_token');
-    console.log(token)
-    if (token) {
-      const decoded = jwtDecode(token);
-      console.log('Decoded Token:', decoded);
+async function getUser() {
+  const cookieStore = cookies();
+  const token = cookieStore.get("auth_token");
 
-      const { usuario, login } = decoded;
-      console.log('User Data:', usuario);
-      console.log('Login Status:', login);
-
-      localStorage.setItem('user', JSON.stringify(usuario));
-      localStorage.setItem('login', login);
-
+  if (token) {
+    try {
+      const decoded = jwtDecode(token.value) as {
+        usuario: User;
+        login: boolean;
+      };
+      return {
+        user: decoded.usuario,
+        isLoggedIn: decoded.login,
+      };
+    } catch (error) {
+      console.error("Error decoding token:", error);
     }
-  }, []);
+  }
+
+  return {
+    user: null,
+    isLoggedIn: false,
+  };
+}
+
+export default async function Home() {
+  const { user, isLoggedIn } = await getUser();
 
   return (
     <main className="mx-auto flex gap-28">
       <Aside />
-      <div className="w-full pr-32 mx-auto">
-        <section className="mt-14">
-          <CarouselDemo />
-        </section>
-        <div className="my-10">
-          <div className="flex justify-between">
-          <h2 className="text-2xl font-bold">Trending</h2>
-          <h2 className="text-2xl font-bold text-[#bba583]">Ver más</h2>
+      <div className="w-full mx-auto">
+        <div className="w-[90%]">
+          <section className="mt-14">
+            <CarouselDemo />
+          </section>
+          <div className="my-10">
+            <div className="flex justify-between">
+              <h2 className="text-2xl font-bold">Trending</h2>
+              <h2 className="text-2xl font-bold text-principal">Ver más</h2>
+            </div>
+            <Products limit={5} />
           </div>
-          <Products limit={5} />
-        </div>
-        <div className="my-10">
-          <div className="flex justify-between">
-          <h2 className="text-2xl font-bold">Añadidos recientemente</h2>
+          <div className="my-10">
+            <div className="flex justify-between">
+              <h2 className="text-2xl font-bold">Añadidos recientemente</h2>
+            </div>
+            <Products limit={5} />
           </div>
-          <Products limit={5} />
         </div>
       </div>
     </main>

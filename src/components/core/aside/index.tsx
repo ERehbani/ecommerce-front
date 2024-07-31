@@ -1,7 +1,12 @@
+"use client"
+import { useBearStore } from "@/context/store";
 import { StarIcon, StarFilledIcon } from "@radix-ui/react-icons";
 import React from "react";
 
 const Aside = () => {
+  const bears = useBearStore((state) => state.bears);
+  const addBears = useBearStore((state) => state.increaseBears);
+
   return (
     <aside className="w-[422px] h-full bg-[#d1d1d1] px-20 py-14 flex flex-col gap-8">
       <h2 className="text-xl font-semibold">Categorías</h2>
@@ -33,40 +38,40 @@ const Aside = () => {
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <p>1</p>
-          <StarFilledIcon className="text-[#bba583]" />
+          <StarFilledIcon className="text-principal" />
         </div>
         <div className="flex items-center gap-2">
           <p>2</p>
           <div className="flex gap-1">
-            <StarFilledIcon className="text-[#bba583]" />
-            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-principal" />
+            <StarFilledIcon className="text-principal" />
           </div>
         </div>
         <div className="flex items-center gap-2">
           <p>3</p>
           <div className="flex gap-1">
-            <StarFilledIcon className="text-[#bba583]" />
-            <StarFilledIcon className="text-[#bba583]" />
-            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-principal" />
+            <StarFilledIcon className="text-principal" />
+            <StarFilledIcon className="text-principal" />
           </div>
         </div>
         <div className="flex items-center gap-2">
           <p>4</p>
           <div className="flex gap-1">
-            <StarFilledIcon className="text-[#bba583]" />
-            <StarFilledIcon className="text-[#bba583]" />
-            <StarFilledIcon className="text-[#bba583]" />
-            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-principal" />
+            <StarFilledIcon className="text-principal" />
+            <StarFilledIcon className="text-principal" />
+            <StarFilledIcon className="text-principal" />
           </div>
         </div>
         <div className="flex items-center gap-2">
           <p>5</p>
           <div className="flex gap-1">
-            <StarFilledIcon className="text-[#bba583]" />
-            <StarFilledIcon className="text-[#bba583]" />
-            <StarFilledIcon className="text-[#bba583]" />
-            <StarFilledIcon className="text-[#bba583]" />
-            <StarFilledIcon className="text-[#bba583]" />
+            <StarFilledIcon className="text-principal" />
+            <StarFilledIcon className="text-principal" />
+            <StarFilledIcon className="text-principal" />
+            <StarFilledIcon className="text-principal" />
+            <StarFilledIcon className="text-principal" />
           </div>
         </div>
       </div>
