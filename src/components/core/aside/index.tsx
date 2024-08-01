@@ -1,12 +1,7 @@
-"use client"
-import { useBearStore } from "@/context/store";
-import { StarIcon, StarFilledIcon } from "@radix-ui/react-icons";
+import { StarFilledIcon } from "@radix-ui/react-icons";
 import React from "react";
 
 const Aside = () => {
-  const bears = useBearStore((state) => state.bears);
-  const addBears = useBearStore((state) => state.increaseBears);
-
   return (
     <aside className="w-[422px] h-full bg-[#d1d1d1] px-20 py-14 flex flex-col gap-8">
       <h2 className="text-xl font-semibold">Categorías</h2>

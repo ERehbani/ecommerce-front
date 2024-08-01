@@ -1,30 +1,17 @@
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode, type JwtPayload } from "jwt-decode";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import logo from "../../../public/storigami.svg";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { type User, useUserStore } from "@/context/store";
 
 const getUser = () => {
   if (typeof window === "undefined") {
     return null;
-  }
-
-  const token = Cookies.get("auth_token");
-
-  if (token) {
-    const decoded = jwtDecode(token);
-    console.log("Decoded Token:", decoded);
-
-    const { usuario, login } = decoded;
-    console.log("User Data:", usuario);
-    console.log("Login Status:", login);
-
-    localStorage.setItem("user", JSON.stringify(usuario));
-    localStorage.setItem("login", login);
   }
 
   const userLocal = localStorage.getItem("user");
@@ -32,12 +19,32 @@ const getUser = () => {
 };
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
+  const usuario = useUserStore((state) => state.user);
+  const isLogin = useUserStore((state) => state.isLogin);
+  const logUser = useUserStore((state) => state.logUser);
+
+  interface Decoded extends JwtPayload {
+    usuario?: User;
+    login?: boolean;
+  }
 
   useEffect(() => {
-    const userData = getUser();
-    setUser(userData);
-  }, []);
+    const token = Cookies.get("auth_token");
+
+    if (token && !isLogin) {
+      try {
+        const decoded = jwtDecode(token);
+        console.log("Decoded Token:", decoded);
+
+        const { usuario, login }: Decoded = decoded;
+        logUser(usuario ? usuario : null, login ? login : false);
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    }
+  }, [isLogin, logUser]); // Add dependencies here
+
+  console.log(usuario, isLogin);
 
   return (
     <div className="bg-white border-b border-principal">
@@ -51,7 +58,7 @@ const Navbar = () => {
           />
           <MagnifyingGlassIcon className="absolute right-2.5 top-3 h-4 w-4 text-muted-foreground text-principal" />
         </div>
-        {user ? (
+        {isLogin ? (
           <div className="flex items-center gap-4">
             <Button className="relative p-4 shadow-md border border-principal bg-white text-principal hover:bg-principal hover:text-white group">
               <div className="absolute right-1 top-1 size-5 bg-[#17a2a8] rounded-full flex items-center justify-center">
@@ -68,12 +75,13 @@ const Navbar = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className="group-hover:stroke-white">
+                <title>cart</title>
                 <path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4H6zM3.8 6h16.4M16 10a4 4 0 1 1-8 0" />
               </svg>
             </Button>
             <Button className="p-0">
               <Image
-                src={user.avatarImg}
+                src={usuario ? usuario.avatarImg : ""}
                 alt="user"
                 width={100}
                 height={0}

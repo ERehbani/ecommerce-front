@@ -2,45 +2,28 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useUserStore } from "@/context/store";
 import { useFormik } from "formik";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { toast } from "sonner";
+import Github from "../../../public/github-color.svg";
+import Google from "../../../public/googleLogo.webp";
 import storigami from "../../../public/storigami.svg";
 import EmblaCarousel from "../../components/core/automaticCarousel/EmblaCarousel";
 import "./css/base.css";
-import "./css/sandbox.css";
 import "./css/embla.css";
-import Link from "next/link";
-import Google from "../../../public/googleLogo.webp";
-import Github from "../../../public/github-color.svg";
-import { useEffect } from "react";
-import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
+import "./css/sandbox.css";
 
 const LogIn = () => {
   const router = useRouter();
 
-  useEffect(() => {
-    const token = Cookies.get('auth_token');
-
-    if (token) {
-      // Decode the JWT token to get user data
-      const decoded = jwtDecode(token);
-      console.log('Decoded Token:', decoded);
-
-      // Store user data as needed
-      const { usuario, login } = decoded;
-      console.log('User Data:', usuario);
-      console.log('Login Status:', login);
-
-      // Example: Save to local storage
-      localStorage.setItem('user', JSON.stringify(usuario));
-      localStorage.setItem('login', login);
-
-      // Redirect to the desired page after storing data
-    }
-  }, [router]);
+  // console.log("Current user state:", user);
+  // console.log("Current login state:", isLogin);
 
   const errorMessage = (
     <div className="flex items-center gap-3">

@@ -1,16 +1,11 @@
 // src/app/page.tsx
 
-import { cookies } from "next/headers";
-import { jwtDecode } from "jwt-decode";
 import Aside from "@/components/core/aside";
 import { CarouselDemo } from "@/components/core/carousel";
 import Products from "@/components/products/products";
-import { useBearStore } from "@/context/store";
-
-interface User {
-  // Define user properties based on your JWT payload
-  [key: string]: any;
-}
+import type { User } from "@/context/store";
+import { jwtDecode } from "jwt-decode";
+import { cookies } from "next/headers";
 
 async function getUser() {
   const cookieStore = cookies();
